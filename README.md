@@ -1,3 +1,3 @@
 # krakowska
 
-krakowska is a frontend for [kielba.achook.dev](kielba.achook.dev)
+krakowska is the backend for [kielba.achook.dev](kielba.achook.dev)
