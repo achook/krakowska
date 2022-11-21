@@ -1,4 +1,3 @@
-from typing import Union
 from nordigen import NordigenClient
 
 from os import environ
@@ -10,7 +9,14 @@ cc_client = configcat.create_client(cc_key)
 
 print("ConfigCat is set up")
 
-def get_money() -> Union[str, None]:
+def get_money() -> str:
+    """
+    Gets money from Nordigen API
+    
+    :raises: Exception if Nordigen API is not configured
+
+    :return: Available balance
+    """
     secret_id = cc_client.get_value('secret_id', None)
     secret_key = cc_client.get_value('secret_key', None)
     requisition_id = cc_client.get_value('requisition_id', None)
@@ -32,14 +38,11 @@ def get_money() -> Union[str, None]:
     account_id = accounts["accounts"][0]
     account = client.account_api(id=account_id)
 
-    balances = None
-
     try:
         balances = account.get_balances()["balances"]
     except Exception as e:
-        print("Exeption has occured:")
-        print(e)
-        return None
+        print(f"Exeption has occured: {e}")
+        raise
 
     for balance in balances:
         if balance["balanceType"] == "forwardAvailable":
@@ -47,7 +50,6 @@ def get_money() -> Union[str, None]:
             print(f"Got balance: {b}")
             return b
     
-    print("Couldn't retrieve balance")
-    return None
+    raise Exception("Couldn't retrieve balance")
 
     
