@@ -1,6 +1,11 @@
 from os import environ
+from datetime import datetime
 
 import sentry_sdk as sentry
+
+from api import get_money
+from db import save_data
+
 
 sentry_url = environ["SENTRY_URL"]
 sentry.init(
@@ -10,19 +15,10 @@ sentry.init(
 
 print("Sentry is set up")
 
-from time import sleep
-from datetime import datetime
-
-from api import get_money
-from db import save_data
-
-
 print("Executing...")
 
 money = get_money()
-
-if money is not None:
-    now = datetime.now()
-    save_data(now, money)
+now = datetime.now()
+save_data(now, money)
 
 print("Exiting...")

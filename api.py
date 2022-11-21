@@ -1,21 +1,21 @@
-from nordigen import NordigenClient
-
 from os import environ
 
 import configcatclient as configcat
+from nordigen import NordigenClient
 
 cc_key = environ["CONFIGCAT_KEY"]
 cc_client = configcat.create_client(cc_key)
 
 print("ConfigCat is set up")
 
+
 def get_money() -> str:
     """
     Gets money from Nordigen API
-    
-    :raises: Exception if Nordigen API is not configured
 
-    :return: Available balance
+    :raises Exception: If the API call fails
+
+    :return: Account balance
     """
     secret_id = cc_client.get_value('secret_id', None)
     secret_key = cc_client.get_value('secret_key', None)
@@ -41,7 +41,7 @@ def get_money() -> str:
     try:
         balances = account.get_balances()["balances"]
     except Exception as e:
-        print(f"Exeption has occured: {e}")
+        print(f"Exception has occured: {e}")
         raise
 
     for balance in balances:
@@ -52,4 +52,3 @@ def get_money() -> str:
     
     raise Exception("Couldn't retrieve balance")
 
-    
