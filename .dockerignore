@@ -1,7 +1,14 @@
 env/
 __pycache__/
-data.txt
-.git/
+
 .gitignore
-README.md
+.git/
+.github/
+
 .idea/
+
+.dockerignore
+
+data.txt
+
+README.md
