@@ -5,6 +5,7 @@ import sentry_sdk as sentry
 
 from api import get_money
 from db import save_data
+from next import get_next_update
 
 
 sentry_url = environ["SENTRY_URL"]
@@ -19,6 +20,7 @@ print("Executing...")
 
 money = get_money()
 now = datetime.now()
-save_data(now, money)
+next_update = get_next_update()
+save_data(now, money, next_update)
 
 print("Exiting...")
