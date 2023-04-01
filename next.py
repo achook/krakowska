@@ -15,6 +15,6 @@ def get_next_update() -> datetime:
         next_update = datetime.combine(today, time(18, 30))
 
     if now > next_update:
-        next_update += datetime.combine(today, time(11, 30)) + timedelta(days=1)
+        next_update = datetime.combine(today, time(11, 30)) + timedelta(days=1)
 
     return next_update
